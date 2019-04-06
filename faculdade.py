@@ -23,8 +23,6 @@ app.config['MYSQL_DATABASE_DB'] = 'faculdade'
 # Rota para /
 @app.route('/')
 def principal():
-    # Obtendo o cursor para acessar o BD
-    cursor = mysql.get_db().cursor()
     return render_template('index.html')
 
 
@@ -37,6 +35,15 @@ def listarProfessor():
     return render_template('listarprofessores.html', professores=get_idprofessor(cursor))
 
 
+# Rota para exibir professor
+@app.route('/exibirprofessor/<professor>')
+def detalhar(professor):
+
+    # Obtendo o cursor para acessar o BD
+    cursor = mysql.get_db().cursor()
+
+
+    return render_template('exibirprofessor.html', detalhes=get_detalhe(cursor, professor))
 
 # Rodando a app
 if __name__ == '__main__':
