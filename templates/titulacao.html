@@ -272,17 +272,21 @@ input[type=text]:placeholder {
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
+{% if erro %}
+    <span style="color:red">{{erro}}</span><br>
+{% endif %}
+
 <div class="wrapper fadeInDown">
   <div id="formContent">
 
       <!-- Icon -->
     <div class="fadeIn first">
-      <a>Pesquisar por titulação</a>
+      <h1>Pesquisar por titulação</h1>
     </div>
 
     <!-- Pesquisa Form -->
-    <form>
-      <input type="text" id="pesquisa" class="fadeIn second" name="pesquisa" placeholder="titulação">
+    <form action="/listarTitulacao" method="post">
+      <input type="text" class="fadeIn second" name="pesquisar" placeholder="titulação">
       <input type="submit" class="fadeIn fourth" value="pesquisa">
     </form>
 

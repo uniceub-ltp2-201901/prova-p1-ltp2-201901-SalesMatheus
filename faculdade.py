@@ -55,10 +55,18 @@ def pesquisarTitulacao():
 
 
 # Rota para titulação
-@app.route('/consultarPorTitulacao/', methods=['GET','POST'])
+@app.route('/listarTitulacao', methods=['GET','POST'])
 def titulacao():
     if request.method == 'POST':
-        titulacao = request.form.get('titulacao')
+        titulacao = request.form.get('pesquisar')
+
+        #validacao da titulação
+        if(titulacao == 'especialização'):
+            titulacao = 1
+        elif(titulacao == 'mestrado'):
+            titulacao = 2
+        elif(titulacao == 'doutorado'):
+            titulacao = 3
 
         # Obtendo o cursor para acessar o BD
         cursor = mysql.get_db().cursor()
@@ -68,12 +76,12 @@ def titulacao():
 
         # Verificar a senha
         if titulacao is None:
-            return render_template('index.html', erro='Titulação não existe!')
+            return render_template('titulacao.html', erro='Titulação não existe!')
         else:
             # Obtendo o cursor para acessar o BD
             cursor = mysql.get_db().cursor()
 
-            return render_template('titulacao.html',  disciplinas=get_detalhe(cursor, idtitulacao))
+            return render_template('listartitulacao.html',  disciplinas=get_detalhe(cursor, idtitulacao))
 
     else:
         return render_template('index.html', erro='Método incorreto. Use POST!')

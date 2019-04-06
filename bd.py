@@ -21,6 +21,17 @@ def get_detalhe(cursor, professor):
 
     # Fechar o cursor
     cursor.close()
-    print(detalhes)
     return detalhes
 
+def get_idtitulacao(cursor, titulacao):
+    print(titulacao)
+    # Executar o sql
+    cursor.execute(f'select professor.Nome as professor, professor.DataNasc, professor.NomeMae, disciplina.nome, disciplina.curso, disciplina.cargahoraria from faculdade.professor, faculdade.disciplina where professor.idProfessor = disciplina.idprofessor and professor.Titulacao = {titulacao}')
+
+    # Recuperando o retorno do BD
+    professores = cursor.fetchall()
+
+    # Fechar o cursor
+    cursor.close()
+
+    return professores
