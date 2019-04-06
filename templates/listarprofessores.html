@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bem vindo</title>
+</head>
+<body>
+    <h1>Bem vindo</h1>
+
+    <table border="1">
+        <tr>
+            <td>Professor</td>
+        </tr>
+
+        {% for professor in professores %}
+            <tr>
+                <td><a href="/detalhar/{{professor }}">{{professor[0]}}</a></td>
+            </tr>
+        {% endfor %}
+
+    </table>
+</body>
+</html>
