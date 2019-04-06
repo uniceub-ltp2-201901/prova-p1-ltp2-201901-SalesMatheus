@@ -45,6 +45,39 @@ def detalhar(professor):
 
     return render_template('exibirprofessor.html', detalhes=get_detalhe(cursor, professor))
 
+
+# Rota para pesquisar por titulacao
+@app.route('/consultarPorTitulacao/')
+def pesquisarTitulacao():
+
+    return render_template('titulacao.html')
+
+
+
+# Rota para titulação
+@app.route('/consultarPorTitulacao/', methods=['GET','POST'])
+def titulacao():
+    if request.method == 'POST':
+        titulacao = request.form.get('titulacao')
+
+        # Obtendo o cursor para acessar o BD
+        cursor = mysql.get_db().cursor()
+
+        # Obtendo o idtitulacao
+        idtitulacao = get_idtitulacao(cursor, titulacao)
+
+        # Verificar a senha
+        if titulacao is None:
+            return render_template('index.html', erro='Titulação não existe!')
+        else:
+            # Obtendo o cursor para acessar o BD
+            cursor = mysql.get_db().cursor()
+
+            return render_template('titulacao.html',  disciplinas=get_detalhe(cursor, idtitulacao))
+
+    else:
+        return render_template('index.html', erro='Método incorreto. Use POST!')
+
 # Rodando a app
 if __name__ == '__main__':
     app.run(debug=True)
